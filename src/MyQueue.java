@@ -6,30 +6,27 @@ public class MyQueue <T> {
 
     public void add(T value) {
         if (size >= myArrayListCopy.length){
-            T[] newmyArrayListCopy = (T[]) new Object[size + size / 2];
+            T[] MyNewArrayList = (T[]) new Object[size + size / 2];
             for (int i = 0; i < myArrayListCopy.length; i++) {
 
-                newmyArrayListCopy[i] = myArrayListCopy[i];
+                MyNewArrayList[i] = myArrayListCopy[i];
 
             }
-            myArrayListCopy = newmyArrayListCopy;
+            myArrayListCopy = MyNewArrayList;
 
         }
         myArrayListCopy[size] = value;
         size++;
 
     }
-    public T[] getTest(){
-        return myArrayListCopy;
-    }
-    public T[] clear(){
+    public void clear(){
         for (int i = 0; i < myArrayListCopy.length; i++) {
             myArrayListCopy[i] = null;
         }
-        return myArrayListCopy;
+        size = 0;
     }
     public int size(){
-        return myArrayListCopy.length;
+        return size;
     }
     public T peek(){
         return myArrayListCopy[0];
@@ -40,6 +37,7 @@ public class MyQueue <T> {
             myArrayListCopy[i] = myArrayListCopy[i + 1];
         }
         myArrayListCopy[myArrayListCopy.length - 1] = null;
+        size--;
         return firstElemet;
     }
 

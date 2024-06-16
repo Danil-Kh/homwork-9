@@ -7,34 +7,40 @@ public class MyArrayList <T> {
 
     public void add(T value) {
       if (size >= myArrayListCopy.length){
-          T[] newmyArrayListCopy = (T[]) new Object[size + size / 2];
+          T[] myNewArrayList = (T[]) new Object[size + size / 2];
           for (int i = 0; i < myArrayListCopy.length; i++) {
 
-              newmyArrayListCopy[i] = myArrayListCopy[i];
+              myNewArrayList[i] = myArrayListCopy[i];
 
           }
-          myArrayListCopy = newmyArrayListCopy;
+          myArrayListCopy = myNewArrayList;
 
       }
         myArrayListCopy[size] = value;
         size++;
     }
 
-    public T[] remove(int index){
-        for (int i = index; i < myArrayListCopy.length - 1 ; i++) {
-            myArrayListCopy[i] = myArrayListCopy[i + 1];
+    public void remove(int index) {
+        if (index <= size) {
+            for (int i = index; i < size - 1; i++) {
+                myArrayListCopy[i] = myArrayListCopy[i + 1];
+            }
+            size--;
+            myArrayListCopy[myArrayListCopy.length - 1] = null;
+
         }
-        myArrayListCopy[myArrayListCopy.length - 1] = null;
-        return myArrayListCopy;
+        else {
+            throw new ArrayIndexOutOfBoundsException();
+        }
     }
-    public T[] clear(){
+    public void clear(){
         for (int i = 0; i < myArrayListCopy.length; i++) {
             myArrayListCopy[i] = null;
         }
-        return myArrayListCopy;
+        size = 0;
     }
     public int size(){
-        return myArrayListCopy.length;
+        return size;
     }
     public T get(int index){
         return myArrayListCopy[index];

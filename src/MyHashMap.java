@@ -1,10 +1,18 @@
+import java.util.Objects;
+
 public class MyHashMap<K, V> {
-    private static final int DEFAULT_SIZE = 1;
+    private static final int DEFAULT_SIZE = 16;
     private int size = 0;
     private Entry<K, V>[] context = new Entry[DEFAULT_SIZE];
 
     public void put(K key, V value) {
-        int index = calculateIndex(key.hashCode());
+        int index;
+        if (key == null){
+            index = 0;
+        }
+        else {
+            index = calculateIndex(key.hashCode());
+        }
         Entry<K, V> newEntry = new Entry<>(key, value);
         if (context[index] == null) {
             context[index] = newEntry;
@@ -13,7 +21,7 @@ public class MyHashMap<K, V> {
                 Entry<K, V> previus = null;
 
                 while (curent != null){
-                    if(curent.key.equals(key)){
+                    if(Objects.equals(curent.key,key)){
                         curent.value = value;
                         return;
                     }
@@ -25,27 +33,46 @@ public class MyHashMap<K, V> {
         size++;
     }
     public V get(K key) {
-        int index = calculateIndex(key.hashCode());
+        int index;
+        if (key == null){
+            index = 0;
+        }
+        else {
+            index = calculateIndex(key.hashCode());
+        }
         Entry<K, V> current = context[index];
-        if (current.key.equals(key)) {
-            return current.value;
-        } else {
-            while (current != null){
-                if (current.key.equals(key)){
-                    return current.value;
+        try {
+            if (Objects.equals(current.key,key)) {
+                return current.value;
+            }
+            else {
+                while (current != null){
+                    if (Objects.equals(current.key,key)) {
+                        return current.value;
+                    }
+                    current = current.next;
                 }
-               current = current.next;
             }
         }
+        catch (NullPointerException e){
+            return null;
+        }
         return null;
+
     }
     public void remove(K key){
-        int index = calculateIndex(key.hashCode());
+        int index;
+        if (key == null){
+            index = 0;
+        }
+        else {
+            index = calculateIndex(key.hashCode());
+        }
         Entry<K, V> current = context[index];
         Entry<K, V> previos = null;
 
         while (current != null){
-            if (current.key.equals(key)){
+            if (Objects.equals(current.key,key)){
                 if (previos == null){
                     context[index] = current.next;
                 }
