@@ -38,15 +38,17 @@ public class MyStack <T> {
         return MyStackMas[size - 1];
     }
     public T pop(){
-        for (int i = 0; i < MyStackMas.length; i++) {
-            if (MyStackMas[i] == null){
-                T element = MyStackMas[i - 1];
-                MyStackMas[i - 1] = null;
-                size--;
-                return element;
-            }
+        for (int i = size; i < 0;) {
+            MyStackMas[i] = MyStackMas[i + 1];
         }
-        return null;
+        T lastElement = MyStackMas[size - 1];
+        MyStackMas[size - 1] = null;
+        size--;
+        return lastElement;
+
+    }
+    public T[] gettest(){
+        return MyStackMas;
     }
     public int size(){
         return size;

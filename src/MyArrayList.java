@@ -43,7 +43,13 @@ public class MyArrayList <T> {
         return size;
     }
     public T get(int index){
-        return myArrayListCopy[index];
+        if (index  > size - 1){
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        else {
+            return myArrayListCopy[index];
+        }
+
     }
 
 
