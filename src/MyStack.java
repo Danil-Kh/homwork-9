@@ -38,11 +38,8 @@ public class MyStack <T> {
         return MyStackMas[size - 1];
     }
     public T pop(){
-        for (int i = size; i < 0;) {
-            MyStackMas[i] = MyStackMas[i + 1];
-        }
         T lastElement = MyStackMas[size - 1];
-        MyStackMas[size - 1] = null;
+        MyStackMas[size -1] = null;
         size--;
         return lastElement;
 
